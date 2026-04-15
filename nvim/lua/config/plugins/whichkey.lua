@@ -1,6 +1,6 @@
 local setup_table = {
-      -- delay between pressing a key and opening which-key (milliseconds)
-      -- this setting is independent of vim.o.timeoutlen
+      preset = 'helix',
+      -- ms between key and which-key display, independent of vim.o.timeoutlen
       delay = 400,
       icons = {
         -- set icon mappings to true if you have a Nerd Font

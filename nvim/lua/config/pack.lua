@@ -22,7 +22,7 @@ vim.pack.add(plugins)
 
 local names = {
         "config.plugins.whichkey",
-        "config.plugins.telescope",
+        "config.plugins.telescope",  -- must go before lsp
         "config.lsp.lsp",
 }
 for _, name in ipairs(names) do

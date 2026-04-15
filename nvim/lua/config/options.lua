@@ -1,9 +1,11 @@
 vim.o.number = true
 vim.o.relativenumber = true
 
--- vim.o.autocomplete = true
+vim.o.autocomplete = false  -- don't run automatically/always
+vim.o.completeopt = 'fuzzy,menuone,popup'  -- ,noselect'
+-- vim.o.completeopt = 'fuzzy,menu,menuone,noselect,preview'
 -- vim.o.pummaxwidth = 40
--- vim.o.completeopt = 'menu,menuone,noselect,nearest'
+
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.o.mouse = 'a'
