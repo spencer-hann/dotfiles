@@ -6,8 +6,8 @@ vim.keymap.set({ 'i' }, 'jj', '<Esc>', { desc = 'lazy <Esc>' })
 -- Map Ctrl-Backspace to delete the previous word
 vim.keymap.set('i', '<C-H>', '<C-w>', { noremap = true })
 vim.keymap.set('c', '<C-H>', '<C-w>', { noremap = true })
-vim.keymap.set({'n', 'i'}, '<C-s>', '<cmd>w<CR>')
-vim.keymap.set({'n', 'i'}, '<C-S>', '<cmd>wa<CR>')
+vim.keymap.set({'n', 'i'}, '<C-s>', '<cmd>w<CR>', { desc = ':w' })
+vim.keymap.set({'n', 'i'}, '<C-S>', '<cmd>wa<CR>', { desc = ':wa' })
 
 vim.keymap.set('n', '<leader>z', '<C-z>', { desc = 'background neovim' })
 vim.keymap.set('n', '<leader>w', '<C-w>', { desc = 'window' })
@@ -22,7 +22,7 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 -- Clear highlights on search when pressing <Esc> in normal mode `:h hlsearch`
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
-vim.keymap.set('n', '<leader>lh', '<cmd>checkhealth vim.lsp<CR>', { desc = 'check[h]ealth vim.lsp' })
+vim.keymap.set('n', '<leader>lH', '<cmd>checkhealth vim.lsp<CR>', { desc = 'check[H]ealth vim.lsp' })
 
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier

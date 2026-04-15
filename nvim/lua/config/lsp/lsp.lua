@@ -27,9 +27,11 @@ local function lsp_attach_callback(event)
   map('<C-space>', vim.lsp.buf.hover, 'Open preview (hover)', 'n', false)
   map('d', vim.lsp.buf.hover, 'Open preview [d]ocs (hover)')
 
+  map('R', '<cmd>lsp restart<CR>', '[R]estart')
+
   -- Rename the variable under your cursor.
   --  Most Language Servers support renaming across files, etc.
-  map('r', vim.lsp.buf.rename, '[R]ename')
+  map('r', vim.lsp.buf.rename, '[r]ename')
   mapjmp('gr', require('telescope.builtin').lsp_references, 'Goto [R]eferences')
   mapjmp('gd', require('telescope.builtin').lsp_definitions, 'Goto [D]efinition')
   mapjmp('gD', vim.lsp.buf.declaration, 'Goto [D]eclaration')
