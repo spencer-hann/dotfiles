@@ -33,7 +33,3 @@ vim.keymap.set('n', '<leader>lH', '<cmd>checkhealth vim.lsp<CR>', { desc = 'chec
 -- or just use <C-\><C-n> to exit terminal mode
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
--- TODO: revisit
--- Diagnostic keymaps
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
-

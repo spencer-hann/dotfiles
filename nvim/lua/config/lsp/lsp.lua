@@ -52,12 +52,11 @@ local function lsp_attach_callback(event)
 
   local client = vim.lsp.get_client_by_id(event.data.client_id)
   if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf) then
-    map('h',
-      function()
+    local fn = function()
         vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
-      end,
-      'Toggle Inlay [H]ints'
-    )
+    end
+    map('h', fn, 'Toggle Inlay [H]ints')
+    map('<leader>th', fn, 'Inlay [H]ints', 'n', false)
   end
 end
 
@@ -94,6 +93,89 @@ local function lsp_setup_diagnostic_messaging()
 end
 
 
+local function setup_blink_autocomplete()
+    require('blink.cmp').setup({
+
+       -- issues w/ vim.pack.add + rust binaries... maybe just wait for blink v2
+       fuzzy =  { implementation = 'lua' }, --'prefer_rust_with_warning' },
+
+       signature = { enabled = true },
+       keymap = {
+           -- preset = "default",
+           ["<CR>"] = { "select_and_accept" },
+           ["<C-n>"] = { "show", "hide" },
+           ["<Esc>"] = { "hide", "fallback" },
+           -- ["<C-space>"] = {},
+           -- ["<C-p>"] = {},
+           -- ["<Tab>"] = {},
+           -- ["<S-Tab>"] = {},
+           -- ["<C-y>"] = { "show", "show_documentation", "hide_documentation" },
+           -- ["<C-n>"] = { "select_and_accept" },
+           ["<C-k>"] = { "select_prev", "fallback" },
+           ["<C-j>"] = { "select_next", "fallback" },
+           -- ["<C-b>"] = { "scroll_documentation_down", "fallback" },
+           -- ["<C-f>"] = { "scroll_documentation_up", "fallback" },
+           -- ["<C-l>"] = { "snippet_forward", "fallback" },
+           -- ["<C-h>"] = { "snippet_backward", "fallback" },
+           -- -- ["<C-e>"] = { "hide" },
+       },
+
+       -- appearance = {
+       --     use_nvim_cmp_as_default = true,
+       --     nerd_font_variant = "normal",
+       -- },
+
+       completion = {
+           documentation = {
+               auto_show = true,
+               auto_show_delay_ms = 200,
+           }
+       },
+
+       cmdline = {
+           completion = {
+               ghost_text = { enabled = true },
+               menu = { auto_show = true },
+           },
+           keymap = {
+               preset = 'inherit',
+               ['<CR>'] = { 'accept_and_enter', 'fallback' },
+           },
+       },
+
+       sources = { default = { "lsp" } }
+   })
+end
+
+
+local function setup_rust_analyzer()
+    vim.lsp.config('rust-analyzer', {
+        settings = {  -- just a guess
+            -- https://www.reddit.com/r/rust/comments/1sh12uz/comment/of9bcsq/?solution=a915e9e3dea4ae10a915e9e3dea4ae10&js_challenge=1&token=bbbe4bf1c9a2b5160829c4be34da5861984fcf6601af47bb6624dd268ce3176e&share_id=mX2GfS5QjsB9STmZ7fcLr&utm_medium=android_app&utm_name=androidcss&utm_source=share&utm_term=1
+            --  rust-analyzer.inlayHints.chainingHints.enable
+            inlayHints = { chainingHints = { enable = true }, }
+        }
+    })
+end
+
+
+local function setup_lua_ls()
+    vim.lsp.config('lua_ls', {
+      settings = {
+        Lua = {
+          runtime = { version = 'LuaJIT' },
+          -- diagnostics = { globals = { 'vim' } },
+          workspace = {
+            checkThirdParty = false,
+            library = { vim.env.VIMRUNTIME },
+          },
+          telemetry = { enable = false },
+        },
+      },
+    })
+end
+
+
 return function()
         require("mason").setup()
         require("mason-lspconfig").setup()
@@ -103,29 +185,13 @@ return function()
                         "stylua",
                         "basedpyright",
                         "rust-analyzer",
-                }
+                },
         })
 
         require('which-key').add({
                 {"<leader>l", group = "[L]SP" },
                 {"<leader>lg", group = "[g]oto ..." },
-                {"<leader>lc", group = "[c]alls ..." },
-        })
-
-        vim.lsp.config('lua_ls', {
-          settings = {
-            Lua = {
-              runtime = { version = 'LuaJIT' },
-              -- diagnostics = { globals = { 'vim' } },
-              workspace = {
-                checkThirdParty = false,
-                library = {
-                  vim.env.VIMRUNTIME,
-                },
-              },
-              telemetry = { enable = false },
-            },
-          },
+                {"<leader>lc", group = "function [c]alls ..." },
         })
 
         vim.api.nvim_create_autocmd( 'LspAttach', {
@@ -134,6 +200,10 @@ return function()
         })
 
         lsp_setup_diagnostic_messaging()
+
+        setup_lua_ls()
+        setup_rust_analyzer()
+        setup_blink_autocomplete()
 
         -- apparently don't need this?
         -- vim.lsp.enable({ "lua_ls" })
