@@ -102,7 +102,7 @@ local function setup_blink_autocomplete()
        signature = { enabled = true },
        keymap = {
            -- preset = "default",
-           ["<CR>"] = { "select_and_accept" },
+           ["<CR>"] = { "select_and_accept", "fallback" },
            ["<C-n>"] = { "show", "hide" },
            ["<Esc>"] = { "hide", "fallback" },
            -- ["<C-space>"] = {},
