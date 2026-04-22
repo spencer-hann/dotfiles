@@ -64,26 +64,27 @@ local catpuc = {
 }
 
 
-local batches = {mela, kana, gruv, catpuc, nvim_default}
+local batches = {catpuc, kana, mela, gruv, nvim_default}
 local scheme_list = vim.iter(batches):flatten():totable()
 
 local colorscheme_iterator = (
-        function()
-                local i = 1
-                return {
-                        next = function()
-                                i = 1 + i % #scheme_list
-                                scheme_list[i]()
-                        end,
-                        prev = function()
-                                i = (i > 1) and i - 1 or #scheme_list
-                                scheme_list[i]()
-                        end,
-                }
-        end
+    function()
+        local i = 4
+        return {
+            next = function()
+                i = 1 + i % #scheme_list
+                scheme_list[i]()
+            end,
+            prev = function()
+                i = (i > 1) and i - 1 or #scheme_list
+                scheme_list[i]()
+            end,
+        }
+    end
 )()
 
-scheme_list[1]()
+gruv[1]()  -- gruvbox has special setup that needs to happen always?; unclear
+colorscheme_iterator.next()  -- start off with default i+1
 
 vim.keymap.set(
         "n",

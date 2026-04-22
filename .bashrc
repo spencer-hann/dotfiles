@@ -1,14 +1,18 @@
 
 # alias nvim='(ln --symbolic ~/dotfiles/nvim ~/.config/; trap "rm -f ~/.config/nvim" EXIT; ~/.local/bin/nvim-linux-x86_64.appimage "$@")'
-alias nvim='~/.local/bin/nvim-linux-x86_64.appimage'
+alias nvim=~/.local/bin/nvim-linux-x86_64.appimage
 alias vim=nvim
 
-alias nvimclean='rm -rf .local/state/nvim; rm -rf .cache/nvim'
-alias nvimlinkconfig='ln --verbose --symbolic ~/dotfiles/nvim ~/.config/'
-alias nvimunlinkconfig='rm --verbose ~/.config/nvim'
+# simple rm+echo: 'rm -v' sometimes shows too much
+rmv() { echo "remove: $@"; rm "$@" || echo; }
+
+alias nvimclean='rmv -r ~/.local/state/nvim/; rmv -r ~/.cache/nvim/'
+alias nvimdeepclean='nvimclean; yes | rmv -r ~/.local/share/nvim/'
+alias nvimlinkconfig='ln -v --symbolic ~/dotfiles/nvim ~/.config/'
+alias nvimunlinkconfig='rmv -v ~/.config/nvim'
 
 # vanilla neovim
-alias vnvim='nvimclean; ~/.local/bin/nvim-linux-x86_64.appimage -u NONE'
+alias vnvim='nvimclean; nvim -u NONE'
 
 alias bat='batcat'
 alias cat='batcat --paging=never'
@@ -16,7 +20,7 @@ alias cat='batcat --paging=never'
 alias fd='fdfind'
 
 alias fzp="fzf --preview='batcat --color=always --style=numbers {}'"
-# includes hidden files in fzf search
+# include hidden files in fzf search
 # https://github.com/junegunn/fzf/issues/337#issuecomment-136383876
 alias fzfhidden='find . | fzp'
 
@@ -26,8 +30,6 @@ alias gitd='git diff'
 alias gitdiff='git diff'
 alias gitfetch='git fetch'
 alias gitlog='git log'
-alias gitpull='git pull'
-alias gitpush='git push'
 alias gitpll='git pull'
 alias gitpsh='git push'
 alias gitreset='git reset'
