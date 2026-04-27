@@ -102,10 +102,11 @@ local function setup_blink_autocomplete()
        keymap = {
            -- preset = "default",
            ["<CR>"] = { "select_and_accept", "fallback" },
-           ["<C-n>"] = { "show", "select_next" },
+           -- ["<C-n>"] = { "show", "select_next" },
+           ["<C-l>"] = { "show", "accept" },
            ["<Esc>"] = { "hide", "fallback" },
            ['<Tab>'] = { "accept" },
-           ['<C-l>'] = { "accept" },
+           -- ['<C-l>'] = { "accept" },
            ['<C-h>'] = { "hide" },
            -- ["<C-space>"] = {},
            -- ["<C-y>"] = { "show", "show_documentation", "hide_documentation" },

@@ -12,12 +12,15 @@ local plugins = {
         gh('nvim-telescope/telescope-ui-select.nvim'),
         gh('nvim-telescope/telescope.nvim'),
 
-        -- LSPeez
+        -- LSP
         gh('neovim/nvim-lspconfig'),
         gh('mason-org/mason.nvim'),
         gh('mason-org/mason-lspconfig.nvim'),
         gh('WhoIsSethDaniel/mason-tool-installer.nvim'),
         gh('saghen/blink.cmp'),
+
+        gh('kawre/leetcode.nvim'),  -- https://github.com/kawre/leetcode.nvim
+        gh('MunifTanjim/nui.nvim'),  -- leetcode.nvim dependency
 }
 
 if vim.g.have_nerd_font then table.insert(plugins, gh('nvim-tree/nvim-web-devicons')) end
@@ -28,6 +31,7 @@ local names = {
         "config.plugins.whichkey",
         "config.plugins.telescope",  -- must go before lsp
         "config.lsp.lsp",
+        "config.plugins.leetcode",
 }
 for _, name in ipairs(names) do
         package.loaded[name] = nil  -- un-cache module/package
