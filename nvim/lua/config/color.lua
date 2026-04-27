@@ -7,7 +7,7 @@ vim.pack.add({
 
 local function _set(name)
         vim.cmd.colorscheme(name)
-        print(name)
+        -- print(name)
 end
 
 local function nvim_default() _set('default') end

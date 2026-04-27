@@ -99,16 +99,15 @@ local function setup_blink_autocomplete()
        -- issues w/ vim.pack.add + rust binaries... maybe just wait for blink v2
        fuzzy =  { implementation = 'lua' }, --'prefer_rust_with_warning' },
 
-       signature = { enabled = true },
        keymap = {
            -- preset = "default",
            ["<CR>"] = { "select_and_accept", "fallback" },
-           ["<C-n>"] = { "show", "hide" },
+           ["<C-n>"] = { "show", "select_next" },
            ["<Esc>"] = { "hide", "fallback" },
+           ['<Tab>'] = { "accept" },
+           ['<C-l>'] = { "accept" },
+           ['<C-h>'] = { "hide" },
            -- ["<C-space>"] = {},
-           -- ["<C-p>"] = {},
-           -- ["<Tab>"] = {},
-           -- ["<S-Tab>"] = {},
            -- ["<C-y>"] = { "show", "show_documentation", "hide_documentation" },
            -- ["<C-n>"] = { "select_and_accept" },
            ["<C-k>"] = { "select_prev", "fallback" },
@@ -117,7 +116,6 @@ local function setup_blink_autocomplete()
            -- ["<C-f>"] = { "scroll_documentation_up", "fallback" },
            -- ["<C-l>"] = { "snippet_forward", "fallback" },
            -- ["<C-h>"] = { "snippet_backward", "fallback" },
-           -- -- ["<C-e>"] = { "hide" },
        },
 
        -- appearance = {
@@ -125,35 +123,34 @@ local function setup_blink_autocomplete()
        --     nerd_font_variant = "normal",
        -- },
 
-       completion = {
-           documentation = {
-               auto_show = true,
-               auto_show_delay_ms = 200,
-           }
-       },
+       signature = { enabled = true },
+       completion = { documentation = { auto_show = true, auto_show_delay_ms = 200 } },
 
        cmdline = {
            completion = {
-               ghost_text = { enabled = true },
                menu = { auto_show = true },
+               -- ghost_text = { enabled = true },
            },
            keymap = {
                preset = 'inherit',
-               ['<CR>'] = { 'accept_and_enter', 'fallback' },
+               ['<CR>'] = {},  -- 'accept_and_enter', 'fallback' },
            },
        },
 
-       sources = { default = { "lsp" } }
+       sources = { default = { "lsp", "path", "snippets", "buffer" } },
    })
 end
 
 
 local function setup_rust_analyzer()
-    vim.lsp.config('rust-analyzer', {
-        settings = {  -- just a guess
+    vim.lsp.config('rust_analyzer', {
+        settings = {
+          ['rust-analyzer'] = {
+            diagnostics = { disabled = { "unlinked-file" }, },
             -- https://www.reddit.com/r/rust/comments/1sh12uz/comment/of9bcsq/?solution=a915e9e3dea4ae10a915e9e3dea4ae10&js_challenge=1&token=bbbe4bf1c9a2b5160829c4be34da5861984fcf6601af47bb6624dd268ce3176e&share_id=mX2GfS5QjsB9STmZ7fcLr&utm_medium=android_app&utm_name=androidcss&utm_source=share&utm_term=1
             --  rust-analyzer.inlayHints.chainingHints.enable
             inlayHints = { chainingHints = { enable = true }, }
+          }
         }
     })
 end

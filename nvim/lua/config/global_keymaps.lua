@@ -3,9 +3,9 @@ vim.g.maplocalleader = ' '
 
 vim.keymap.set({ 'i' }, 'jj', '<Esc>', { desc = 'lazy <Esc>' })
 
+
 -- Map Ctrl-Backspace to delete the previous word
-vim.keymap.set('i', '<C-H>', '<C-w>', { noremap = true })
-vim.keymap.set('c', '<C-H>', '<C-w>', { noremap = true })
+vim.keymap.set({'i', 'c'}, '<C-H>', '<C-w>', { noremap = true })
 vim.keymap.set({'n', 'i'}, '<C-s>', '<cmd>w<CR>', { desc = ':w' })
 vim.keymap.set({'n', 'i'}, '<C-S>', '<cmd>wa<CR>', { desc = ':wa' })
 

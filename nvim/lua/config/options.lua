@@ -6,6 +6,9 @@ vim.o.completeopt = 'fuzzy,menuone,popup'  -- ,noselect'
 -- vim.o.completeopt = 'fuzzy,menu,menuone,noselect,preview'
 -- vim.o.pummaxwidth = 40
 
+vim.opt.wrap = true           -- Enable soft wrapping
+vim.opt.linebreak = true      -- Wrap at words
+vim.opt.breakindent = true    -- Maintain indentation on wrap
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.o.mouse = 'a'
@@ -14,9 +17,6 @@ vim.o.mouse = 'a'
 
 vim.o.pumborder = 'rounded'
 vim.o.winborder = 'rounded'
-
--- Every wrapped line will continue visually indented.
-vim.o.breakindent = true
 
 -- Save undo history
 vim.o.undofile = true

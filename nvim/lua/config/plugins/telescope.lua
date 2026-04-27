@@ -37,8 +37,8 @@ return function()
             defaults = {
               sorting_strategy = "ascending",
               -- layout_strategy = 'horizontal',
-              layout_strategy = 'vertical',
-              -- layout_strategy = 'flex',
+              -- layout_strategy = 'vertical',
+              layout_strategy = 'flex',
               -- preview pane wider than default because hard to read on laptop
               layout_config = { width = 0.96,
                       -- preview_width = 0.5,
@@ -49,6 +49,7 @@ return function()
                 --   -- ["<C-y>"] = function(prompt_bufnr)
                 --   ["<C-l>"] = function(prompt_bufnr)
                 n = {
+                  ["dd"] = require("telescope.actions").delete_buffer,
                   ["<C-l>"] = function(prompt_bufnr)
                     local action_state = require("telescope.actions.state")
                     local picker = action_state.get_current_picker(prompt_bufnr)
