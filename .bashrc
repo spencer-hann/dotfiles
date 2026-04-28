@@ -1,12 +1,9 @@
-
-# alias nvim='(ln --symbolic ~/dotfiles/nvim ~/.config/; trap "rm -f ~/.config/nvim" EXIT; ~/.local/bin/nvim-linux-x86_64.appimage "$@")'
-# alias nvim=~/.local/bin/nvim-linux-x86_64.appimage
 alias vim=nvim
 
 alias nvimlink='ln -v --symbolic ~/.local/bin/nvim-linux-x86_64.appimage ~/.local/bin/nvim'
 alias nvimunlink='rm -v ~/.local/bin/nvim'
 
-# simple rm+echo: 'rm -v' sometimes shows too much
+# simple rm+echo: 'rm -v' sometimes too much
 rmv() { echo "remove: $@"; rm "$@" || echo; }
 alias nvimclean='rmv -r ~/.local/state/nvim/; rmv -r ~/.cache/nvim/'
 alias nvimdeepclean='nvimclean; yes | rmv -r ~/.local/share/nvim/'
