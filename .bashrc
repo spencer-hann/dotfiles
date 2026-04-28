@@ -43,6 +43,8 @@ alias bell='echo -e "\a"'
 #   $ sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"; bell;'
 
+set -o vi
+
 # https://github.com/git-ecosystem/git-credential-manager/blob/release/docs/credstores.md#gits-built-in-credential-cache
 export GCM_CREDENTIAL_STORE=cache export GCM_CREDENTIAL_CACHE_OPTIONS="--timeout 1200"
 
