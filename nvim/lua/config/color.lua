@@ -3,11 +3,12 @@ vim.pack.add({
 	"https://github.com/savq/melange-nvim",
 	"https://github.com/sainnhe/gruvbox-material",
 	"https://github.com/catppuccin/nvim",
+	"https://github.com/metalelf0/kintsugi-nvim",
 })
 
 local function _set(name)
         vim.cmd.colorscheme(name)
-        -- print(name)
+        print(name)
 end
 
 local function nvim_default() _set('default') end
@@ -63,9 +64,19 @@ local catpuc = {
         -- opts = { auto_integrations = true }
 }
 
+local kint = {
+        function() _set("kintsugi-dark") end,
+        function() _set("kintsugi-flared") end,
+}
 
-local batches = {catpuc, kana, mela, gruv, nvim_default}
-local scheme_list = vim.iter(batches):flatten():totable()
+
+local batches = {catpuc, kana, mela, gruv, kint, nvim_default}
+local scheme_list = vim.iter(batches):flatten():map(
+    function (item)
+        return type(item) == "string" and function() _set(item) end or item
+    end
+):totable()
+
 
 local colorscheme_iterator = (
     function()
@@ -84,6 +95,7 @@ local colorscheme_iterator = (
 )()
 
 gruv[1]()  -- gruvbox has special setup that needs to happen always?; unclear
+vim.cmd("redraw")  -- redraw UI to clear command/message output
 colorscheme_iterator.next()  -- start off with default i+1
 
 vim.keymap.set(
