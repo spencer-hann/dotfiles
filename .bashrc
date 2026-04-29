@@ -45,6 +45,7 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 export EDITOR=nvim
 
 set -o vi
+bind -m vi-insert '"\C-l": clear-screen'
 
 # https://github.com/git-ecosystem/git-credential-manager/blob/release/docs/credstores.md#gits-built-in-credential-cache
 export GCM_CREDENTIAL_STORE=cache export GCM_CREDENTIAL_CACHE_OPTIONS="--timeout 1200"
