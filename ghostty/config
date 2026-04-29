@@ -1,0 +1,25 @@
+# theme = Catppuccin Mocha
+theme = Gruvbox Material Dark
+# foreground = d4be98  # original Gruvbox foreground
+foreground = eedec8
+background = 0e0e0e
+background-opacity = 0.97
+background-blur = 80
+
+# window-height = 96
+# window-width = 82
+
+window-theme = ghostty
+window-decoration = auto
+keybind = ctrl+shift+w=toggle_window_decorations
+gtk-toolbar-style = flat
+gtk-titlebar-style = tabs
+gtk-wide-tabs = true
+
+window-padding-balance = true
+window-padding-x = 4
+window-padding-y = 4
+
+# native fullscreen (F11) not working on ubuntu dell...
+keybind = ctrl+f=toggle_fullscreen
+

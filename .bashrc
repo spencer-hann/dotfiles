@@ -13,6 +13,8 @@ alias nvimunlinkconfig='rm -v ~/.config/nvim'
 # vanilla neovim
 alias vnvim='nvimclean; nvim -u NONE'
 
+alias ghosttylink='ln -v --symbolic ~/dotfiles/ghostty/ ~/.config/'
+
 alias bat='batcat'
 alias cat='batcat --paging=never'
 
@@ -49,4 +51,7 @@ if [ -f "$HOME/.cargo/env" ]; then
         alias clippy='cargo-clippy'
         . "$HOME/.cargo/env"
 fi
+
+# free -h; echo
+date; echo
 
