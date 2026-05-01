@@ -1,7 +1,7 @@
 # theme = Catppuccin Mocha
 theme = Gruvbox Material Dark
 # foreground = d4be98  # original Gruvbox foreground
-foreground = eedec8
+foreground = ffeee8
 background = 0e0e0e
 background-opacity = 0.96
 background-blur = 80
