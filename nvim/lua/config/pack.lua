@@ -19,6 +19,8 @@ local plugins = {
         gh('WhoIsSethDaniel/mason-tool-installer.nvim'),
         gh('saghen/blink.cmp'),
 
+        gh('rachartier/tiny-inline-diagnostic.nvim'),
+
         gh('kawre/leetcode.nvim'),  -- https://github.com/kawre/leetcode.nvim
         gh('MunifTanjim/nui.nvim'),  -- leetcode.nvim dependency
 }
@@ -38,11 +40,18 @@ for _, name in ipairs(names) do
         require(name)()
 end
 
--- TODO: should go in its own file like others
 -- INFO: formatting and syntax highlighting
 -- equivalent to :TSUpdate
 require("nvim-treesitter.install").update("all")
-require("nvim-treesitter").setup({
-  auto_install = true, -- autoinstall languages that are not installed yet
+require("nvim-treesitter").setup({ auto_install = true }) -- install languages not installed yet
+
+require('tiny-inline-diagnostic').setup({
+    preset = "powerline",  -- modern classic minimal powerline ghost simple nonerdfont amongus
+    transparent_bg = false,
+    transparent_cursorline = false,
+    options = {
+        show_source = { enabled = true },  -- source/which language server
+        show_all_diags_on_cursorline = true,  -- all, not just under cursor
+    },
 })
 
