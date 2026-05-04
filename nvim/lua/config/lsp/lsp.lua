@@ -183,6 +183,7 @@ return function()
                         "clangd",
                         "lua_ls",
                         "rust-analyzer",
+                        "ruff",
                         "stylua",
                 },
         })
