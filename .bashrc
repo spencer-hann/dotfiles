@@ -27,10 +27,11 @@ alias fzfhidden='find . | fzp'
 
 alias gitbranch='git branch'
 alias gitcheckout='git checkout'
-alias gitd='git diff'
 alias gitdiff='git diff'
+alias gitdifftool='git difftool'
 alias gitfetch='git fetch'
 alias gitlog='git log'
+alias gitmergetool='git mergetool'
 alias gitpll='git pull'
 alias gitpsh='git push'
 alias gitreset='git reset'
@@ -42,17 +43,34 @@ alias bell='echo -e "\a"'
 #   $ sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"; bell;'
 
+
 export EDITOR=nvim
+man() { $(which man) "$*" | nvim +Man!; }  # export MANPAGER='nvim +Man!'
 
 set -o vi
 bind -m vi-insert '"\C-l": clear-screen'
 
+
 # https://github.com/git-ecosystem/git-credential-manager/blob/release/docs/credstores.md#gits-built-in-credential-cache
 export GCM_CREDENTIAL_STORE=cache export GCM_CREDENTIAL_CACHE_OPTIONS="--timeout 1200"
 
+git config --global core.editor nvim
+git config --global core.pager batcat
+git config --global diff.tool nvimdiff
+git config --global diff.guitool nvimdiff
+git config --global difftool.prompt false
+git config --global merge.ff true
+git config --global merge.tool nvimdiff
+git config --global merge.conflictstyle zdiff3
+# git config --global merge.conflictstyle diff3
+
+# https://stackoverflow.com/questions/72911004/how-to-configure-git-mergetool-properly-for-neovim
+git config --global mergtool.nvimdiff.layout "LOCAL,BASE,REMOTE / MERGED"
+
+
 if [ -f "$HOME/.cargo/env" ]; then
-        alias clippy='cargo-clippy'
-        . "$HOME/.cargo/env"
+    alias clippy='cargo-clippy'
+    . "$HOME/.cargo/env"
 fi
 
 # free -h; echo
