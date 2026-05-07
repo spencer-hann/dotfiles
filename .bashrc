@@ -15,7 +15,7 @@ alias vnvim='nvimclean; nvim -u NONE'
 
 alias ghosttylink='ln -v --symbolic ~/dotfiles/ghostty/ ~/.config/'
 
-alias bat='batcat'
+alias bat='batcat --paging=always'
 alias cat='batcat --paging=never'
 
 alias fd='fdfind'
