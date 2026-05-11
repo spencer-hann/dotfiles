@@ -105,7 +105,7 @@ local function setup_blink_autocomplete()
            -- ["<C-n>"] = { "show", "select_next" },
            ["<C-l>"] = { "show", "accept" },
            ["<Esc>"] = { "hide", "fallback" },
-           ['<Tab>'] = { "accept" },
+           ['<Tab>'] = { "accept", "fallback" },
            -- ['<C-l>'] = { "accept" },
            ['<C-h>'] = { "hide" },
            -- ["<C-space>"] = {},
@@ -143,6 +143,15 @@ local function setup_blink_autocomplete()
 end
 
 
+local function setup_basedpyright()
+    vim.lsp.config('basedpyright', {
+        settings = {
+            basedpyright = { analysis = { inlayHints = { genericTypes = true } } },
+        }
+    })
+end
+
+
 local function setup_rust_analyzer()
     vim.lsp.config('rust_analyzer', {
         settings = {
@@ -161,6 +170,7 @@ local function setup_lua_ls()
     vim.lsp.config('lua_ls', {
       settings = {
         Lua = {
+          hint = { enable = true },
           runtime = { version = 'LuaJIT' },
           -- diagnostics = { globals = { 'vim' } },
           workspace = {
@@ -183,6 +193,7 @@ return function()
                         "clangd",
                         "lua_ls",
                         "rust-analyzer",
+                        "ruff",
                         "stylua",
                 },
         })
@@ -200,9 +211,11 @@ return function()
 
         lsp_setup_diagnostic_messaging()
 
+        setup_blink_autocomplete()
+
+        setup_basedpyright()
         setup_lua_ls()
         setup_rust_analyzer()
-        setup_blink_autocomplete()
 
         -- apparently don't need this?
         -- vim.lsp.enable({ "lua_ls" })
