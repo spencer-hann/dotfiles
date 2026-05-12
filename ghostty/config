@@ -1,8 +1,11 @@
 # theme = Catppuccin Mocha
-theme = Gruvbox Material Dark
+# theme = Gruvbox Material Dark
+# theme = Brogrammer
+# theme = 3024 Night
+theme = Broadcast
 # foreground = d4be98  # original Gruvbox foreground
-foreground = ffeee8
-background = 0e0e0e
+# foreground = ffeee8
+background = 1e1e1e
 background-opacity = 0.96
 background-blur = 80
 

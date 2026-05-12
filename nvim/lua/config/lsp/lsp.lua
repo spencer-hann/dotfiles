@@ -146,7 +146,12 @@ end
 local function setup_basedpyright()
     vim.lsp.config('basedpyright', {
         settings = {
-            basedpyright = { analysis = { inlayHints = { genericTypes = true } } },
+            basedpyright = {
+                analysis = {
+                    inlayHints = { genericTypes = true },
+                    diagnosticMode = "workspace",
+                }
+            },
         }
     })
 end
