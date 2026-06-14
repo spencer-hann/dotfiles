@@ -30,16 +30,19 @@ local function cycle_diagnostic_mode()
     -- virtual_text   -> inline/end-of-line text
     -- virtual_lines  -> extra lines injected below
     if diagnostic_mode == 0 then
-        vim.diagnostic.config({ virtual_lines = false, virtual_text = true })
         require('tiny-inline-diagnostic').disable()
+        vim.diagnostic.config({ virtual_lines = false, virtual_text = false })
     elseif diagnostic_mode == 1 then
         require('tiny-inline-diagnostic').disable()
-        vim.diagnostic.config({ virtual_lines = true, virtual_text = true })
+        vim.diagnostic.config({ virtual_lines = false, virtual_text = true })
     elseif diagnostic_mode == 2 then
         vim.diagnostic.config({ virtual_lines = false, virtual_text = false })
         require('tiny-inline-diagnostic').enable()
+    elseif diagnostic_mode == 3 then
+        require('tiny-inline-diagnostic').disable()
+        vim.diagnostic.config({ virtual_lines = true, virtual_text = true })
     end
-    diagnostic_mode = (diagnostic_mode + 1) % 3
+    diagnostic_mode = (diagnostic_mode + 1) % 4
 end
 
 cycle_diagnostic_mode()  -- invoke once to setup

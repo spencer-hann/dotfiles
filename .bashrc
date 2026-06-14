@@ -15,6 +15,8 @@ alias vnvim='nvimclean; nvim -u NONE'
 
 alias ghosttylink='ln -v --symbolic ~/dotfiles/ghostty/ ~/.config/'
 
+# export BAT_THEME="base16"
+export BAT_THEME="ansi"
 alias bat='batcat --paging=always'
 alias cat='batcat --paging=never'
 
@@ -24,6 +26,8 @@ alias fzp="fzf --preview='batcat --color=always --style=numbers {}'"
 # include hidden files in fzf search
 # https://github.com/junegunn/fzf/issues/337#issuecomment-136383876
 alias fzfhidden='find . | fzp'
+
+alias difft=difftastic
 
 alias gitbranch='git branch'
 alias gitcheckout='git checkout'
@@ -55,7 +59,7 @@ bind -m vi-insert '"\C-l": clear-screen'
 export GCM_CREDENTIAL_STORE=cache export GCM_CREDENTIAL_CACHE_OPTIONS="--timeout 1200"
 
 git config --global core.editor nvim
-git config --global core.pager batcat
+# git config --global core.pager batcat
 git config --global diff.tool nvimdiff
 git config --global diff.guitool nvimdiff
 git config --global difftool.prompt false
