@@ -145,7 +145,11 @@ end
 
 local function setup_basedpyright()
     vim.lsp.config('basedpyright', {
+        cmd = { "uv", "run", "basedpyright-langserver", "--stdio" },
         settings = {
+            python = {
+                pythonPath = ".venv/bin/python3",
+            },
             basedpyright = {
                 analysis = {
                     inlayHints = { genericTypes = true },
