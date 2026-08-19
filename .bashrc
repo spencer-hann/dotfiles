@@ -77,6 +77,10 @@ if [ -f "$HOME/.cargo/env" ]; then
     . "$HOME/.cargo/env"
 fi
 
+if [ $(which uv) ]; then
+    alias ipython='uv run --with ipython ipython'
+fi
+
 # free -h; echo
 date; echo
 
