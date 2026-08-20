@@ -145,11 +145,12 @@ end
 
 local function setup_basedpyright()
     vim.lsp.config('basedpyright', {
+        -- initial setup before Mason can install basedpyright:
+        --   $ uv tool install basedpyright
+        --   $ apt install python3-venv
         cmd = { "uv", "run", "basedpyright-langserver", "--stdio" },
         settings = {
-            python = {
-                pythonPath = ".venv/bin/python3",
-            },
+            -- python = { pythonPath = ".venv/bin/python3", },
             basedpyright = {
                 analysis = {
                     inlayHints = { genericTypes = true },
