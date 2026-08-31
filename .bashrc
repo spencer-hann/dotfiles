@@ -42,6 +42,8 @@ alias gitreset='git reset'
 alias gitswitch='git switch'
 alias gitstatus='git status'
 
+alias status='git fetch; git status'
+
 alias bell='echo -e "\a"'
 # Add an "alert" alias for long running commands (from Ubuntu default bashrc)
 #   $ sleep 10; alert
