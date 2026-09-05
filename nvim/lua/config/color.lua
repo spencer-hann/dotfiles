@@ -11,7 +11,7 @@ local function _set(name)
         print(name)
 end
 
----@diagnostic disable-next-line: unused-local
+---@diagnostic disable-next-line: unused-local, unused-function
 local function nvim_default() _set('default') end
 
 local kana = {
@@ -101,27 +101,29 @@ gruv[1]()  -- gruvbox has special setup that needs to happen always?; unclear
 vim.cmd("redraw")  -- redraw UI to clear command/message output
 
 
-local default_colorscheme_iterator = create_colorscheme_iterator()
-default_colorscheme_iterator.next()  -- start off with default+1
+local default_color_iter = create_colorscheme_iterator()
+default_color_iter.next()  -- start off with default+1
 
-local c_color_iterator = create_colorscheme_iterator(4)
-local py_color_iterator = create_colorscheme_iterator(2)
-local lua_color_iterator = create_colorscheme_iterator(2)
+local c_color_iter = create_colorscheme_iterator(4)
+local py_color_iter = create_colorscheme_iterator(2)
+local lua_color_iter = create_colorscheme_iterator(2)
+local md_color_iter = create_colorscheme_iterator(1)
 
 local color_iterators = {
-    py = py_color_iterator,
-    c = c_color_iterator,
-    h = c_color_iterator,
-    cc = c_color_iterator,
-    hh = c_color_iterator,
-    hpp = c_color_iterator,
-    cpp = c_color_iterator,
-    lua = lua_color_iterator,
+    py = py_color_iter,
+    c = c_color_iter,
+    h = c_color_iter,
+    cc = c_color_iter,
+    hh = c_color_iter,
+    hpp = c_color_iter,
+    cpp = c_color_iter,
+    lua = lua_color_iter,
+    md = md_color_iter,
 }
 
 local function get_color_iterator()
     local extension = vim.fn.expand('%:e')
-    return color_iterators[extension] or default_colorscheme_iterator
+    return color_iterators[extension] or default_color_iter
 end
 
 
