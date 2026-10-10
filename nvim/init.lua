@@ -10,6 +10,6 @@ require('config.options')
 require('config.global_keymaps')
 
 require('config.color')
-require('config.pack')
+require('config.pack')  -- lsp, plugins, etc.
 require('config.diagnostics')
 

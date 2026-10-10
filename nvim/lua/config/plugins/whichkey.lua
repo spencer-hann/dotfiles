@@ -45,15 +45,13 @@ local my_spec = {
         { '<leader>g', group = '[G]it' },
         { '<leader>s', group = '[S]earch' },
         { '<leader>t', group = '[T]oggle' },
-        { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
 }
 
 -- taken from whick-key.nvim.txt:which-key.nvim-which-key-mappings example
 -- these might not apply....
 local doc_spec = {
-        { "<leader>f", group = "file" }, -- group
-        { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Telescope [F]ind File", mode = "n" },
-        { "<leader>fb", function() print("hello") end, desc = "Foobar" },
+        { "<leader>f", group = "[f]ind" }, -- group
+        { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "[f]ile", mode = "n" },
         -- { "<leader>w", proxy = "<c-w>", group = "windows" }, -- proxy to window mappings
         { "<leader>b", group = "buffers", expand = function()
           return require("which-key.extras").expand.buf()

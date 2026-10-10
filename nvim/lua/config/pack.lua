@@ -6,6 +6,14 @@ local plugins = {
         gh('sainnhe/gruvbox-material'),
         gh('nvim-treesitter/nvim-treesitter'),
 
+        -- LLM/Assistants/Agents
+        -- Pin to the latest stable release (v1.x), which supports the installed
+        -- OpenCode v1 CLI. `main` supports OpenCode v2 (requires >=2.0).
+        -- If you later upgrade to OpenCode v2 (@opencode/cli >=2.0), remove this
+        -- `version` pin so the plugin tracks `main` again.
+        { src = gh('nickjvandyke/opencode.nvim'), version = vim.version.range('*') },
+        gh('folke/snacks.nvim'),  -- optional for cleaner opencode interactions
+
         -- telescope
         gh('nvim-lua/plenary.nvim'),  -- required by telescope, idk
         gh('nvim-telescope/telescope-fzf-native.nvim'),
@@ -25,7 +33,11 @@ local plugins = {
         gh('MunifTanjim/nui.nvim'),  -- leetcode.nvim dependency
 }
 
-if vim.g.have_nerd_font then table.insert(plugins, gh('nvim-tree/nvim-web-devicons')) end
+if vim.g.have_nerd_font then
+        table.insert(plugins, gh('nvim-tree/nvim-web-devicons'))
+else
+        print("current system does not have nerd font")
+end
 
 vim.pack.add(plugins)
 
@@ -33,6 +45,7 @@ local names = {
         "config.plugins.whichkey",
         "config.plugins.telescope",  -- must go before lsp
         "config.lsp.lsp",
+        "config.plugins.opencode",
         "config.plugins.leetcode",
 }
 for _, name in ipairs(names) do

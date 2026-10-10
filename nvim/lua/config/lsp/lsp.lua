@@ -138,7 +138,10 @@ local function setup_blink_autocomplete()
            },
        },
 
-       sources = { default = { "lsp", "path", "snippets", "buffer" } },
+       sources = {
+           default = { "lsp", "path", "snippets", "buffer" },
+           per_filetype = { opencode_ask = { 'lsp', 'path', 'buffer' } },
+       },
    })
 end
 
