@@ -143,12 +143,51 @@ local function setup_blink_autocomplete()
 end
 
 
+--- @param dispatchers vim.lsp.rpc.Dispatchers
+--- @param config vim.lsp.ClientConfig
+--- @return vim.lsp.rpc.PublicClient
+local function _uv_basedpyright(dispatchers, config)
+    local primary_cmd = { "uv", "run", "basedpyright-langserver", "--stdio" }
+    local fallback_cmd = { "basedpyright-langserver", "--stdio" }
+
+    -- Run the actual primary command with a short timeout.
+    -- If uv fails due to configuration, it exits instantly (code != 0).
+    -- If uv succeeds, the LSP starts spinning and will be forcefully killed by our timeout.
+    local result = vim.system(
+      primary_cmd,
+      { cwd = config.root_dir or vim.fn.getcwd(),
+        stdin = true,  -- open a pipe or the server fails no matter what
+        -- this may be to short if the uv env is not yet synced...
+        timeout = 400, -- 400ms is plenty for uv to evaluate lockfiles/configs
+      }
+    ):wait()
+
+    -- A signal of 15 (SIGTERM) means vim.system killed it because it hit the timeout.
+    -- This indicates 'uv run' successfully initialized the server and it was running!
+    if result.code == 0 or result.code == (128 + 15) then
+      vim.schedule(function()
+        vim.notify("LSP: using 'uv run basedpyright...'", vim.log.levels.INFO)
+      end)
+      return vim.lsp.rpc.start(primary_cmd, dispatchers)
+    end
+
+    vim.schedule(function()
+      vim.notify(
+        "LSP: 'uv run' failed to initialize (Code: " .. result.code .. ", Signal: " .. result.signal .. "). Falling back to Mason basedpyright.",
+        vim.log.levels.WARN
+      )
+    end)
+    return vim.lsp.rpc.start(fallback_cmd, dispatchers)
+end
+
+
 local function setup_basedpyright()
     vim.lsp.config('basedpyright', {
         -- initial setup before Mason can install basedpyright:
         --   $ uv tool install basedpyright
         --   $ apt install python3-venv
-        cmd = { "uv", "run", "basedpyright-langserver", "--stdio" },
+        -- cmd = { "(uv run basedpyright-langserver --stdio) || (basedpyright-langserver --stdio)" },
+        cmd = _uv_basedpyright,
         settings = {
             -- python = { pythonPath = ".venv/bin/python3", },
             basedpyright = {
@@ -157,7 +196,7 @@ local function setup_basedpyright()
                     diagnosticMode = "workspace",
                 }
             },
-        }
+        },
     })
 end
 
@@ -229,6 +268,7 @@ return function()
 
         -- apparently don't need this?
         -- vim.lsp.enable({ "lua_ls" })
+        vim.lsp.enable("basedpyright")
 
 end
 
