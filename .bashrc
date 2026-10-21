@@ -76,6 +76,17 @@ git config --global merge.conflictstyle zdiff3
 git config --global mergtool.nvimdiff.layout "LOCAL,BASE,REMOTE / MERGED"
 
 
+# add '.local/bin/' to $PATH
+if [ -f "$HOME/.local/bin" ]; then
+    case ":{$PATH}:" in
+        *:"$HOME/.local/bin":*) ;;  # empty case
+        *)  # wildcard case
+            export PATH="$HOME/.local/bin:$PATH"
+            ;;  # break
+    esac
+fi
+
+
 if [ -f "$HOME/.cargo/env" ]; then
     alias clippy='cargo-clippy'
     . "$HOME/.cargo/env"
