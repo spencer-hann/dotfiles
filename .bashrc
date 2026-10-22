@@ -29,19 +29,6 @@ alias fzfhidden='find . | fzp'
 
 alias difft=difftastic
 
-alias gitbranch='git branch'
-alias gitcheckout='git checkout'
-alias gitdiff='git diff'
-alias gitdifftool='git difftool'
-alias gitfetch='git fetch'
-alias gitlog='git log'
-alias gitmergetool='git mergetool'
-alias gitpll='git pull'
-alias gitpsh='git push'
-alias gitreset='git reset'
-alias gitswitch='git switch'
-alias gitstatus='git status'
-
 alias status='echoandrun git fetch; git status'
 
 alias bell='echo -e "\a"'
@@ -77,14 +64,12 @@ git config --global mergtool.nvimdiff.layout "LOCAL,BASE,REMOTE / MERGED"
 
 
 # add '.local/bin/' to $PATH
-if [ -f "$HOME/.local/bin" ]; then
-    case ":{$PATH}:" in
-        *:"$HOME/.local/bin":*) ;;  # empty case
-        *)  # wildcard case
-            export PATH="$HOME/.local/bin:$PATH"
-            ;;  # break
-    esac
-fi
+case ":{$PATH}:" in
+    *:"$HOME/.local/bin":*) ;;  # empty case
+    *)  # wildcard case
+        export PATH="$HOME/.local/bin:$PATH"
+        ;;  # break
+esac
 
 
 if [ -f "$HOME/.cargo/env" ]; then
