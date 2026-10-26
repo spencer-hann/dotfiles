@@ -78,7 +78,7 @@ if [ -f "$HOME/.cargo/env" ]; then
     . "$HOME/.cargo/env"
 fi
 
-if [ command -v uv >/dev/null ]; then
+if [ $(command -v uv >/dev/null) ]; then
     alias ipython='uv run --with ipython ipython'
 fi
 
