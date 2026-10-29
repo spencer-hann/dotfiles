@@ -66,6 +66,15 @@ git config --global merge.conflictstyle zdiff3
 git config --global mergetool.nvimdiff.layout "LOCAL,BASE,REMOTE / MERGED"
 
 
+export FZF_DEFAULT_OPTS_FILE="$HOME/dotfiles/fzf.conf"
+
+# Setup fzf
+if [[ ":$PATH:" != *":$HOME/.fzf/bin:"* ]]; then
+    PATH="${PATH:+${PATH}:}$HOME/.fzf/bin"
+fi
+command -v fzf >/dev/null && eval "$(fzf --bash)"
+
+
 # add '.local/bin/' to $PATH
 case ":$PATH:" in
     *:"$HOME/.local/bin":*) ;;
