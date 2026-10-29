@@ -1,0 +1,5 @@
+# source at the top of $HOME/.bashrc
+
+# Iris Autocomplete ( https://github.com/versenilvis/IRIS )
+command -v iris >/dev/null && eval "$(iris init bash)"
+

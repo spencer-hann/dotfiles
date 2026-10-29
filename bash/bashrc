@@ -1,3 +1,5 @@
+# source at the top of $HOME/.bashrc
+
 alias vim=nvim
 
 alias nvimlink='ln -v --symbolic ~/.local/bin/nvim-linux-x86_64.appimage ~/.local/bin/nvim'
